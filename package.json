@@ -1,0 +1,19 @@
+{
+  "name": "md-workbench",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local Markdown viewer/editor with fast render/edit toggle (Electron).",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "lint": "node -c main.js && node -c renderer.js"
+  },
+  "devDependencies": {
+    "electron": "^29.4.0"
+  },
+  "dependencies": {
+    "dompurify": "^3.0.10",
+    "marked": "^12.0.2"
+  }
+}
+

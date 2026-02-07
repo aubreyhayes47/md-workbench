@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>md-workbench</title>
+    <style>
+      :root {
+        --bg: #0e0f14;
+        --panel: #151827;
+        --text: #e9ebf4;
+        --muted: #a7acc4;
+        --accent: #59d9a6;
+        --border: rgba(255, 255, 255, 0.10);
+        --shadow: rgba(0, 0, 0, 0.35);
+        --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      }
+
+      html, body {
+        height: 100%;
+        margin: 0;
+        background: radial-gradient(1200px 700px at 15% 20%, rgba(89, 217, 166, 0.22), transparent 55%),
+                    radial-gradient(900px 500px at 85% 10%, rgba(126, 165, 255, 0.18), transparent 55%),
+                    var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+      }
+
+      .app {
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto 1fr;
+      }
+
+      .toolbar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        background: rgba(21, 24, 39, 0.82);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 12px 30px var(--shadow);
+      }
+
+      .toolbar .title {
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        margin-right: 8px;
+      }
+
+      .toolbar .path {
+        flex: 1;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      button {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 8px 10px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+
+      button:hover { border-color: rgba(89, 217, 166, 0.6); }
+      button.primary {
+        background: rgba(89, 217, 166, 0.14);
+        border-color: rgba(89, 217, 166, 0.45);
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: 1fr;
+        height: 100%;
+        padding: 14px;
+        box-sizing: border-box;
+      }
+
+      .panel {
+        height: 100%;
+        background: rgba(21, 24, 39, 0.66);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+
+      textarea {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        outline: 0;
+        resize: none;
+        padding: 16px 18px;
+        box-sizing: border-box;
+        background: transparent;
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .render {
+        padding: 18px 20px;
+        overflow: auto;
+      }
+
+      .render h1, .render h2, .render h3 { margin-top: 1.0em; }
+      .render p { color: rgba(233, 235, 244, 0.92); line-height: 1.6; }
+      .render code { font-family: var(--mono); background: rgba(255,255,255,0.06); padding: 0 5px; border-radius: 6px; }
+      .render pre { background: rgba(0,0,0,0.35); padding: 12px 14px; border-radius: 12px; overflow: auto; }
+      .render a { color: var(--accent); }
+      .hidden { display: none; }
+
+      .status {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <div class="toolbar">
+        <div class="title">md-workbench</div>
+        <button id="openBtn" class="primary">Open (Ctrl+O)</button>
+        <button id="saveBtn">Save (Ctrl+S)</button>
+        <button id="toggleBtn">Edit (Ctrl+E)</button>
+        <div id="path" class="path">No file loaded</div>
+        <div id="status" class="status"></div>
+      </div>
+      <div class="content">
+        <div class="panel">
+          <textarea id="editor" spellcheck="false" class="hidden"></textarea>
+          <div id="preview" class="render"></div>
+        </div>
+      </div>
+    </div>
+    <script src="./renderer.js"></script>
+  </body>
+</html>
