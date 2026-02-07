@@ -15,6 +15,38 @@ Local Ubuntu desktop app to open, edit, render, and save Markdown files with a f
 
 - Node.js + npm
 
+## Quick Start (Ubuntu)
+
+```bash
+git clone https://github.com/aubreyhayes47/md-workbench.git
+cd md-workbench
+npm install
+npm start
+```
+
+### Set As Default Markdown Opener (xdg-mime)
+
+This installs a `.desktop` entry to `~/.local/share/applications/md-workbench.desktop` and sets it as the default handler for Markdown:
+
+```bash
+./scripts/install_default_opener.sh
+```
+
+Verify:
+
+```bash
+xdg-mime query default text/markdown
+xdg-mime query default text/x-markdown
+```
+
+Test:
+
+```bash
+xdg-open /path/to/file.md
+```
+
+Note: the `.desktop` file's `Exec=` points at the current folder location; if you move the repo, rerun `./scripts/install_default_opener.sh`.
+
 ## Install
 
 ```bash
